@@ -17,32 +17,32 @@
 				<div class="sidebar-sticky">
 					<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted ">Режимы</h6>
 
-					<ul class="nav flex-column">
-						<li class="nav-item">
+					<ul class="nav flex-column" data-mode-panel>
+						<li class="nav-item" data-status="">
 							<a class="nav-link active" href="#">
 								<img src="/public/assets/data-collection.png" alt="" style="width: 30px">
 								Все заказы
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" data-status="new">
 							<a class="nav-link" href='#'>
 								<img src="/public/assets/new.png" alt="" style="width: 30px">
 								Новые
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" data-status="process">
 							<a class="nav-link" href="#">
 								<img src="/public/assets/innovation.png" alt="" style="width: 30px">
 								На исполнение
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" data-status="back">
 							<a class="nav-link" href="#">
 								<img src="/public/assets/back.png" alt="" style="width: 30px">
 								Возврат
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" data-status="archived">
 							<a class="nav-link" href="#">
 								<img src="/public/assets/compressed.png" alt="" style="width: 30px">
 								Заархивированные
@@ -53,7 +53,7 @@
 					<h6
 						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
 						Последние просматриваемые</h6>
-					<ul class="nav flex-column mb-2">
+					<ul class="nav flex-column mb-2" data-reviewed-list>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<img src="/public/assets/arrow.png" alt="" style="width: 30px">
@@ -95,8 +95,15 @@
 					<div class="form-group col">
 						<label>Заказ:</label>
 						<select class="form-control" data-filter-good>
-							<option selected></option>
-							<option></option>
+							<option value="" selected>Все</option>
+							<option value="Полимерная ванна">Полимерная ванна</option>
+							<option value="Бумага для принтера">Бумага для принтера</option>
+							<option value="Карандаши">Карандаши</option>
+							<option value="Фотоальбом">Фотоальбом</option>
+							<option value="Штриховка">Штриховка</option>
+							<option value="Краски для принтера">Краски для принтера</option>
+							<option value="Ручка">Ручка</option>
+							<option value="Канцелярский нож">Канцелярский нож</option>
 						</select>
 					</div>
 					<div class="form-group col">
@@ -196,7 +203,7 @@
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 					  <li class="page-item disabled">
-						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Назад</a>
+						<a class="page-link" href="#" tabindex="-1"  data-pagination-prev>Назад</a>
 					  </li>
 					  <span class="d-flex" data-pagenumbers>
 						<li class="page-item active" data-page="1"><a class="page-link" href="#">1</a></li>
@@ -204,7 +211,7 @@
 						<li class="page-item" data-page="3"><a class="page-link" href="#">3</a></li>
 						</span>
 					  <li class="page-item">
-						<a class="page-link" href="#">Вперед</a>
+						<a class="page-link" href="#" data-pagination-next>Вперед</a>
 					  </li>
 					</ul>
 				  </nav>
@@ -220,10 +227,20 @@
 			<td>%PRICE%</td>
 			<td><div class="badge badge-%STATUS_COLOR%">%STATUS_TEXT%</div></td>
 			<td>
-				<button class="btn btn-outline-primary btn-sm">Редактировать</button>
+				<a href='/public/editor.html#{"id":%ID%}'>
+					<button class="btn btn-outline-primary btn-sm">Редактировать</button>
+				</a>
 			</td>
 			<td>%DATE%</td>
 		</tr>
+	</template>
+	<template data-reviewed>
+		<li class="nav-item">
+			<a class="nav-link" href='/public/editor.html#{"id":%ID%}'>
+				<img src="/public/assets/arrow.png" alt="" style="width: 30px">
+				%FULLNAME%
+			</a>
+		</li>
 	</template>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -237,7 +254,7 @@
 	<script src="/public/src/EventEmitter.js"></script>
 	<script src="/public/src/Router.js"></script>
 	<script src="/public/src/Database.js"></script>
-	<script src="/public/src/seeding.js"></script>
+	<script src="/public/src/nav.js"></script>
 	<script src="/public/src/index.js"></script>
 	<script src="/dist/main.js"></script>
 </body>

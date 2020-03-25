@@ -3,5 +3,5 @@
 
     const Router = window.Router = window.Router || new EventEmitter
 
-    window.addEventListener('popstate', () => Router.emit('hash:update'))
+    window.addEventListener('popstate', () => Router.emit('hash:change'))
 })();
